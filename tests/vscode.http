@@ -1,0 +1,63 @@
+
+###
+get http://localhost:3001/https/www.baidu.com
+
+###
+get http://localhost:3001/https/www.baidu.com:9879/here/is/the/url/par?v=kkkkkk
+
+###
+post http://localhost:3001/https/www.baidu.com/here/is/the/url/par?v=kii
+content-type: application/json
+
+{
+    "message": "sample",
+    "time": "Wed, 21 Oct 2015 18:27:50 GMT"
+}
+
+###
+
+get http://localhost:3001/
+
+###
+get http://localhost:3001/get
+
+###
+get http://localhost:3001/get?k=v&kkk=1
+
+
+###
+POST http://localhost:3001/post?message=ppp&kkk=1 HTTP/1.1
+content-type: application/json
+authorization: Token ddddddd
+
+{
+    "message": "sample",
+    "time": "Wed, 21 Oct 2015 18:27:50 GMT",
+    "int_key": 1024
+}
+
+###
+
+POST https://httpbin.org/anything
+content-type: application/json
+authorization: Token ddddddd
+
+{
+    "message": "sample",
+    "time": "Wed, 21 Oct 2015 18:27:50 GMT",
+    "int_key": 1024
+}
+
+###
+
+GET http://localhost:3001/https/httpbin.org/anything
+content-type: application/json
+authorization: Token ddddddd
+
+###
+
+POST http://localhost:3001/https/httpbin.org/anything
+content-type: application/json
+authorization: Token ddddddd
+
+{"k":952799}
