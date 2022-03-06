@@ -5,6 +5,9 @@
 
 import winston from 'winston'
 import { StreamLikeType } from 'morgan-body';
+import { resolve } from 'path';
+import { config } from 'dotenv';
+config({ path: resolve(__dirname, '../../.env') });
 
 const levels = {
   error: 0,
@@ -16,7 +19,9 @@ const levels = {
 
 const level = () => {
   const env = process.env.NODE_ENV || 'development'
+  console.log(`process.env.NODE_ENV : ${process.env.NODE_ENV}` )
   const isDevelopment = env === 'development'
+  console.log(`Running at Developemnt? ${isDevelopment} `)
   return isDevelopment ? 'debug' : 'warn'
 }
 
@@ -28,11 +33,11 @@ const colors = {
   debug: 'white',
 }
 
-//winston.addColors(colors)
+winston.addColors(colors)
 
 const format = winston.format.combine(
   winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss:ms' }),
-  //winston.format.colorize({ all: false }),
+  winston.format.colorize({ all: true }),
   winston.format.printf(
     (info) => `${info.timestamp} ${info.level}: ${info.message}`,
   ),

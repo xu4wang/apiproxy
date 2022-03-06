@@ -1,4 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import { configure } from "winston";
 import Logger from "./logger"
 
 //https://github.com/axios/axios#request-config
@@ -33,8 +34,9 @@ const errorResp:ServerResponse ={
 
 async function client(config:RequestConfig):Promise<ServerResponse> {
     try {
-        const response = await axios(config as {});
-        console.log(response);
+        Logger.info(JSON.stringify(config,null,4))
+        const response = await axios(config as AxiosRequestConfig);
+        //console.log(response);
         Logger.info("Request Headers(to target) & data:")
         Logger.info(JSON.stringify(response.config.headers,null,4));
         Logger.info(JSON.stringify(response.config.data,null,4));
