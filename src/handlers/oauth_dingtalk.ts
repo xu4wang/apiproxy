@@ -23,10 +23,12 @@ redirect_uri=https%3A%2F%2Fwww.aaaaa.com%2Fauth
     redirect_uri:`${base_url}oauth_dingtalk/callback` ,
     response_type:'code',
     scope: 'openid',
+    client_id: req.query.client_id,
     state: req.query.state,
     prompt:'consent'
   });
-  const redirect_url:string = `${auth_url}?${query}`
+  const redirect_url:string = `${auth_url}?${query}`;
+  Logger.debug(redirect_url)
   res.redirect(redirect_url);
 };
 
