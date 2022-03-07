@@ -10,12 +10,23 @@ export const oauth_dingtalk_auth: Handler = async (req, res) => {
   //params:req.query
   db.set(req.query.state, req.query["redirect_uri"]) 
   const base_url = process.env.PUBLIC_URL || 'http://localhost:3001/'
-  req.query.redirect_uri = `${base_url}oauth_dingtalk/callback` 
-  const query = querystring.stringify(req.query);
+
+  /*
+redirect_uri=https%3A%2F%2Fwww.aaaaa.com%2Fauth
+&response_type=code
+&client_id=dingxxxxxxx   //应用的AppKey 
+&scope=openid   //此处的openId保持不变
+&state=dddd
+&prompt=consent
+  */
+  const query = querystring.stringify({
+    redirect_uri:`${base_url}oauth_dingtalk/callback` ,
+    response_type:'code',
+    scope: 'openid',
+    state: req.query.state,
+    prompt:'consent'
+  });
   const redirect_url:string = `${auth_url}?${query}`
-  Logger.debug("checking db");
-  Logger.debug(db.get(req.query.state));
-  Logger.debug(redirect_url)
   res.redirect(redirect_url);
 };
 
@@ -27,6 +38,7 @@ export const oauth_dingtalk_callback: Handler = async (req, res) => {
     Logger.debug("checking db");
     Logger.debug(db.get(state));
     const uri = db.get(state);
+    db.delete(state);
     const query = querystring.stringify({
       code: req.query["authCode"],
       state: req.query["state"]
