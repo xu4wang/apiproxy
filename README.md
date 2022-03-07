@@ -19,7 +19,7 @@ nodemon will monitor the changes and compile/restart the app.
 
 ## Configuration & Customization
 
-### rules.ts 
+### routes.ts 
 
 There are some default route defined in routes.ts, which can be used for testing purpose. 
 You can test a forwarding rule by forwarding one API to another local API.
@@ -47,7 +47,7 @@ Detailed logs are automatically saved in logs/all.log , it can be less verbose b
 
 ## Reference
 
-- https://github.com/tomas/needle
+- https://github.com/directus/directus/discussions/11881
 
 
 
